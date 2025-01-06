@@ -1,23 +1,15 @@
-/* BLUETOOTH CAR WITH ARDUINO UNO AND HC-05
 
-   THIS CODE DEMONSTRATES CONTROLLING A CAR VIA SMARTPHONE USING BLUETOOTH COMMUNICATION.
 
-   NOTE-IT IS ADVISED THAT BLUETOOTH MODULE SHOULD BE ATTACHED TO ARDUINO BOARD AFTER
-        UPLOADING CODE TO AVOID ERRORS AND PREVENT POSSIBLE DAMAGE TO BLUETOOTH MODULE.
-
-   CODE CREATED BY - AMEYA ANGADI
-   LAST MODIFIED ON - 26/07/2024
-   VERSION - 1.3
-*/
-
-#define led1 = 13
-#define in1 = 12
-#define in2 = 11
-#define in3 = 10
-#define in4 = 9
+#define led1 = 13 
+#define led2 = 8 // Break led
+#define in1 = 12 // left forward
+#define in2 = 11 // left reverse
+#define in3 = 10 // right forward
+#define in4 = 9 // right reverse
 
 void setup() {
   Serial.begin(9600);
+  pinMode(8, OUTPUT); // Break led
   pinMode(9, OUTPUT);
   pinMode(10, OUTPUT);
   pinMode(11, OUTPUT);
@@ -33,12 +25,16 @@ void loop() {
       digitalWrite(11, LOW);
       digitalWrite(10, HIGH);
       digitalWrite(9, LOW);
+      digitalWrite(13,HIGH);
     }
     else if (inputvalue == 'B') {
       digitalWrite(12, LOW);
       digitalWrite(11, HIGH);
       digitalWrite(10, LOW);
       digitalWrite(9, HIGH);
+      digitalWrite(8,HIGH); // Break light
+      digitalWrite(13,HIGH);
+
     }
 
     else if (inputvalue == 'R') {
@@ -46,6 +42,7 @@ void loop() {
       digitalWrite(11, LOW);
       digitalWrite(10, HIGH);
       digitalWrite(9, LOW);
+      digitalWrite(13,HIGH);
     }
 
     else if (inputvalue == 'L') {
@@ -53,6 +50,8 @@ void loop() {
       digitalWrite(11, LOW);
       digitalWrite(10, LOW);
       digitalWrite(9, LOW);
+      digitalWrite(13,HIGH); // LED
+
     }
 
     else if (inputvalue == 'C') {
@@ -60,6 +59,8 @@ void loop() {
       digitalWrite(11, HIGH);
       digitalWrite(10, HIGH);
       digitalWrite(9, LOW);
+      digitalWrite(13,HIGH); // LED
+
     }
 
     else if (inputvalue == 'A') {
@@ -67,21 +68,32 @@ void loop() {
       digitalWrite(11, LOW);
       digitalWrite(10, LOW);
       digitalWrite(9, HIGH);
+      digitalWrite(13,HIGH);
+
     }
 
     else if (inputvalue == 'O') {
       digitalWrite(13, HIGH);
     }
 
-    else if (inputvalue == 's') {
-      digitalWrite(13, LOW);
+  // Motion off
+    else if (inputvalue == 'N') {
+      digitalWrite(12, LOW);
+      digitalWrite(11, LOW);
+      digitalWrite(10, LOW);
+      digitalWrite(9, LOW);
+      digitalWrite(8, LOW);
     }
 
+  // ALL STOP Start OF
     else if (inputvalue == 'S') {
       digitalWrite(12, LOW);
       digitalWrite(11, LOW);
       digitalWrite(10, LOW);
       digitalWrite(9, LOW);
+      digitalWrite(8, LOW);
+      digitalWrite(13, LOW);
+
     }
   }
 }
